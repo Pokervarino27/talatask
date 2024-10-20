@@ -41,6 +41,7 @@ TALATASK/
 │   └── config/
 │       └── config.go
 └── go.mod
+``` 
 
 - `domain`: Contiene las entidades principales y reglas de negocio.
 - `ports`: Define las interfaces para los repositorios y servicios.
