@@ -17,6 +17,7 @@ El sistema permite asignar tareas a empleados basándose en sus habilidades(skil
 
 El proyecto sigue la arquitectura hexagonal (también conocida como "Ports and Adapters") con la siguiente estructura:
 
+``` bash
 TALATASK/
 ├── cmd/
 │   └── main.go
