@@ -32,7 +32,7 @@ func (db *Database) seedData() {
 	employees := []domain.Employee{
 		{
 			ID:   "1",
-			Name: "John Doe",
+			Name: "Diego Comihual",
 			Skills: []domain.Skill{
 				"programming",
 				"design",
@@ -43,7 +43,7 @@ func (db *Database) seedData() {
 		},
 		{
 			ID:   "2",
-			Name: "Jane Smith",
+			Name: "Daniel Cortes",
 			Skills: []domain.Skill{
 				"analysis",
 				"project management",
@@ -54,7 +54,7 @@ func (db *Database) seedData() {
 		},
 		{
 			ID:   "3",
-			Name: "Bob Johnson",
+			Name: "Juan Valdes",
 			Skills: []domain.Skill{
 				"programming",
 				"testing",

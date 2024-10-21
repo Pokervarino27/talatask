@@ -8,4 +8,5 @@ type Task struct {
 	Date           time.Time
 	Duration       int //en horas
 	RequiredSkills []Skill
+	IsAssigned     bool
 }

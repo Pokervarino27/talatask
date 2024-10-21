@@ -4,18 +4,21 @@ import (
 	"log"
 
 	"github.com/gofiber/fiber/v2"
-	"github.com/pokervarino27/talatask/internal/config"
+	"github.com/pokervarino27/talatask/cmd/routes"
+	"github.com/pokervarino27/talatask/internal/infraestructure/config"
+	logger "github.com/pokervarino27/talatask/internal/infraestructure/logger"
 )
 
 func main() {
 
-	appConfig := config.NewAppConfig()
-
+	logger.Init()
 	app := fiber.New()
 
-	appConfig.Handler.SetupRoutes(app)
+	appConfig := config.NewAppConfig()
 
-	log.Println("Server starting on :8080")
+	routes.SetupRoutes(app, appConfig.Handler)
+
+	logger.Info("Server starting on :8080")
 	if err := app.Listen(":8080"); err != nil {
 		log.Fatalf("Error starting server: %v", err)
 	}
