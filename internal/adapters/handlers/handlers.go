@@ -54,8 +54,3 @@ func (h *Handler) GenerateReport(c *fiber.Ctx) error {
 
 	return c.JSON(report)
 }
-
-func (h *Handler) SetupRoutes(app *fiber.App) {
-	app.Post("/assign-tasks", h.AssignTasks)
-	app.Get("/report", h.GenerateReport)
-}

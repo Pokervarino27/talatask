@@ -1,6 +1,7 @@
 package usecases
 
 import (
+	"fmt"
 	"reflect"
 	"testing"
 	"time"
@@ -25,20 +26,22 @@ func (m *MockTaskRepository) GetAll() ([]domain.Task, error) {
 }
 
 func TestAssignTasks(t *testing.T) {
-	now := time.Now()
+	today := time.Now().Truncate(24 * time.Hour)
+	tomorrow := today.AddDate(0, 0, 1)
+	dayAfterTomorrow := today.AddDate(0, 0, 2)
 	employees := []domain.Employee{
 		{
 			ID:                "1",
 			Name:              "Diego Comihual",
-			Skills:            []domain.Skill{"prograaming", "design"},
+			Skills:            []domain.Skill{"programming", "design"},
 			AvailabilityHours: 8,
-			AvailabilityDays:  []time.Time{now, now.AddDate(0, 0, 1)},
+			AvailabilityDays:  []time.Time{today, tomorrow},
 		}, {
 			ID:                "2",
-			Name:              "Joe Doe",
+			Name:              "Daniel Cortes",
 			Skills:            []domain.Skill{"testing", "analysis"},
 			AvailabilityHours: 6,
-			AvailabilityDays:  []time.Time{now, now.AddDate(0, 0, 1)},
+			AvailabilityDays:  []time.Time{today, tomorrow, dayAfterTomorrow},
 		},
 	}
 
@@ -46,14 +49,14 @@ func TestAssignTasks(t *testing.T) {
 		{
 			ID:             "1",
 			Title:          "Develop feature",
-			Date:           now,
+			Date:           today,
 			Duration:       4,
 			RequiredSkills: []domain.Skill{"programming"},
 		},
 		{
 			ID:             "2",
 			Title:          "Test feature",
-			Date:           now,
+			Date:           tomorrow,
 			Duration:       3,
 			RequiredSkills: []domain.Skill{"testing"},
 		},
@@ -65,6 +68,8 @@ func TestAssignTasks(t *testing.T) {
 	service := NewTaskAssignmentService(mockEmployeeRepo, mockTaskRepo)
 
 	assignments, err := service.AssignTask()
+
+	fmt.Println(assignments)
 
 	if err != nil {
 		t.Errorf("Error al asignar tareas: %v", err)
